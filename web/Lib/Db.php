@@ -17,7 +17,6 @@ class DB{
         $this->pass = isset($_SERVER['PASS_DB']) ? $_SERVER['PASS_DB'] : $this->pass;
         $this->db = isset($_SERVER['NAME_DB']) ? $_SERVER['NAME_DB'] : $this->db;
         
-        print_r($this);exit;
         //efetua connecao e seleciona db
         $this->conn = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
         
