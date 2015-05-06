@@ -10,7 +10,7 @@ require_once 'Lib/User.php';
 $retorno = array();
 $meli = new Meli();
 
-$r = $meli->authorize($_GET['code'], 'http://matsuoka.im/dafiti/code.php');
+$r = $meli->authorize($_GET['code'], 'https://account-money-preapproval.herokuapp.com/code.php/code.php');
 
 if($r['httpCode'] == 200){
     $token = $r['body'];

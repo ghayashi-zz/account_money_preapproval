@@ -11,7 +11,7 @@ $params = array(
 
 $preference = array(
     "payer_email" => $_REQUEST['email'],
-    "back_url" => "http://matsuoka.im/dafiti/charge_preapproval.php",
+    "back_url" => "https://account-money-preapproval.herokuapp.com/charge_preapproval.php",
     "external_reference" => "ORDER-12345",
     "reason" => "Pagamento com Dinheiro em Conta",
     "status" => "authorized",

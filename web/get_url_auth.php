@@ -7,6 +7,6 @@ error_reporting(E_ALL);
 require_once 'MercadoLivre/meli.php';
 
 $meli = new Meli();
-$redirectUrl = $meli->getAuthUrl('http://matsuoka.im/dafiti/code.php');
+$redirectUrl = $meli->getAuthUrl('https://account-money-preapproval.herokuapp.com/code.php/code.php');
 
 echo json_encode(array("url" => $redirectUrl));
