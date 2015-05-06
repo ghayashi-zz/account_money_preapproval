@@ -160,9 +160,9 @@
                             $("#iframe_auth_url").attr("src", resp.url);
                             $('#modal_auth').modal('toggle');
                             
-                            timer = setInterval(function(){
+                            /*timer = setInterval(function(){
                                 getBalance(false);
-                            }, 2000);              
+                            }, 2000);*/
                         }
                     });
                     
