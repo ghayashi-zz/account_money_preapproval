@@ -1,0 +1,17 @@
+// comprador
+
+user_id : 181214606
+nickname : TETE9478341
+password : qatest6026
+site_id : MLB
+email : test_user_44378241@testuser.com
+
+// vendedor
+
+user_id : 181215541
+nickname : TETE5433507
+password : qatest8150
+site_id : MLB
+email : test_user_40076148@testuser.com
+
+APP: 8719661089596255 / 2907762493882925
