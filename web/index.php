@@ -162,7 +162,7 @@
                             
                             timer = setInterval(function(){
                                 getBalance(false);
-                            }, 500);              
+                            }, 2000);              
                         }
                     });
                     
