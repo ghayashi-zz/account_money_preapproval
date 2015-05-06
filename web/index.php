@@ -145,8 +145,6 @@
              </div>
             
         </div>
-        
-        <p><?php print_r($_SERVER); ?></p>
 
         <script>
             var timer
