@@ -1,0 +1,65 @@
+#box_pagar_mp{
+    width: 275px;
+    height: 170px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+#logo{
+    float: left;
+    width: 100%;
+    text-align:center;
+    margin: 0 0 15px 0;
+}
+
+#logo img{
+    width: 100px;
+}
+
+#box_loading{
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+#box_auth, #box_pagar, #box_pagamento_status{
+    float: left;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#saldo_mp{
+    font-weight: bold;    
+}
+
+#modal_auth .modal-dialog{
+    width: 900px;
+}
+
+#iframe_auth_url{
+    width: 870px;
+    height: 600px;
+    border: 0;
+    overflow:hidden;
+}
+
+#modal_pay .modal-dialog{
+    width: 900px;
+}
+
+#iframe_pay_url{
+    width: 870px;
+    height: 600px;
+    border: 0;
+    overflow:hidden;
+}
+
+.modal-content .close{
+    z-index: 9999;
+    top: 5px;
+    right: 10px;
+    position: fixed;
+}

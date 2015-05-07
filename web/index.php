@@ -5,8 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -14,77 +13,8 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        
-        <style>
-            #box_pagar_mp{
-                width: 275px;
-                height: 170px;
-                background-color: #f7f7f9;
-                border: 1px solid #e1e1e8;
-                margin: 30px auto;
-                padding: 15px;
-            }
-            
-            #logo{
-                float: left;
-                width: 100%;
-                text-align:center;
-                margin: 0 0 15px 0;
-            }
-            
-            #logo img{
-                width: 100px;
-            }
-            
-            #box_loading{
-                float: left;
-                width: 100%;
-                text-align: center;
-            }
-            
-            #box_auth, #box_pagar, #box_pagamento_status{
-                float: left;
-                width: 100%;
-                text-align: center;
-                display: none;
-            }
-            
-            #saldo_mp{
-                font-weight: bold;    
-            }
-            
-            #modal_auth .modal-dialog{
-                width: 900px;
-            }
-            
-            #iframe_auth_url{
-                width: 870px;
-                height: 600px;
-                border: 0;
-                overflow:hidden;
-            }
-            
-            #modal_pay .modal-dialog{
-                width: 900px;
-            }
-            
-            #iframe_pay_url{
-                width: 870px;
-                height: 600px;
-                border: 0;
-                overflow:hidden;
-            }
-            
-            .modal-content .close{
-                z-index: 9999;
-                top: 5px;
-                right: 10px;
-                position: fixed;
-            }
-            
-        </style>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="assets/css/style.css">
     </head>
     
     
@@ -145,92 +75,14 @@
              </div>
             
         </div>
-
-        <script>
-            var timer
-            
-            $( document ).ready(function() {
-                $("#showModal").click(function(){
-                    
-                    $.ajax({
-                        url: "get_url_auth.php",
-                        success: function(resp){
-                            resp = jQuery.parseJSON(resp);
-                            
-                            $("#iframe_auth_url").attr("src", resp.url);
-                            $('#modal_auth').modal('toggle');
-                            
-                            timer = setInterval(function(){
-                                getBalance(false);
-                            }, 2000);
-                        }
-                    });
-                    
-                });
-                
-                $("#showModalPagamento").click(function(){
-                    var email = "test_user_44378241@testuser.com";
-                    $("#box_pagar").hide();
-                    $("#box_loading").show();
-                    
-                    $.ajax({
-                        url: "create_preapproval.php?email=" + email + "&amount=" + $("#saldo_mp").html(),
-                        success: function(resp){
-                            resp = jQuery.parseJSON(resp);
-                            
-                            $("#payment_id").html(resp.payment.id)
-                            $("#box_pagamento_status").show();
-                            $("#box_loading").hide();
-                                     
-                        }
-                    });
-                    
-                });
-                
-                
-                getBalance(true);
-            });
-            
-            function getBalance(show_box_auth) {
-                var email = "test_user_44378241@testuser.com";
-                
-                $.ajax({
-                    url: "get_balance.php?email=" + email,
-                    success: function(resp){
-                        resp = jQuery.parseJSON(resp);
-                        
-                        if ('httpCode' in resp && resp.httpCode != 400) {
-                            var balance = resp.body;
-                            
-                            // esconde a modal
-                            $('#modal_auth').modal('hide');
-                            
-                            // força a action de buscar o saldo
-                            clearInterval(timer);
-                            
-                            $("#saldo_mp").html(balance.available_balance)
-                            
-                            
-                            $("#box_pagar").show();
-                            $("#box_loading").hide();
-                            $("#box_auth").hide();
-                            
-                        }else{
-                            
-                            // usuario não esta autenticado no mp
-                            // libera o box de autenticação
-                            if (show_box_auth) {
-                                $("#box_loading").hide();
-                                $("#box_auth").show();
-                            }
-                        }
-                        
-                    }
-                });
-            }
-            
-            
-        </script>
+        
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
+        <script src="assets/js/actions.js"></script> 
     </body>
     
 </html>
