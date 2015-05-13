@@ -63,3 +63,12 @@
     right: 10px;
     position: fixed;
 }
+
+
+#user_info{
+    width: 600px;
+    margin: 0 auto;
+    display: none;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+}

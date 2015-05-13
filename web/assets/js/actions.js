@@ -12,7 +12,7 @@ $( document ).ready(function() {
                 $('#modal_auth').modal('toggle');
                 
                 timer = setInterval(function(){
-                    getBalance(false);
+                    getUserInfo(false);
                 }, 2000);
             }
         });
@@ -39,14 +39,14 @@ $( document ).ready(function() {
     });
     
     
-    getBalance(true);
+    getUserInfo(true);
 });
 
-function getBalance(show_box_auth) {
+function getUserInfo(show_box_auth) {
     var email = "test_user_44378241@testuser.com";
     
     $.ajax({
-        url: "get_balance.php?email=" + email,
+        url: "get_user_info.php?email=" + email,
         success: function(resp){
             resp = jQuery.parseJSON(resp);
             
@@ -61,6 +61,9 @@ function getBalance(show_box_auth) {
                 
                 $("#saldo_mp").html(balance.available_balance)
                 
+                
+                $("#user_info").html(JSON.stringify(balance.user_info, null, 2));
+                $("#user_info").show();
                 
                 $("#box_pagar").show();
                 $("#box_loading").hide();

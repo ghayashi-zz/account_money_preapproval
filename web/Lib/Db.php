@@ -2,10 +2,14 @@
 
 class DB{
     
-    private $host = "localhost";
+    /*private $host = "localhost";
     private $user = "root";
     private $pass = "root";
-    private $db = "account_money_preapproval";
+    private $db = "account_money_preapproval";*/
+    private $host = "us-cdbr-iron-east-02.cleardb.net";
+    private $user = "b77167ae9219d4";
+    private $pass = "49df999b";
+    private $db = "heroku_7e646364ef701ac";
     private $conn;
     
     

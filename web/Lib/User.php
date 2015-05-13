@@ -101,5 +101,20 @@ class User{
         }
     }
     
+    public function me(){
+        if(!$this->select() == false){
+            $access_token = $this->get_access_token();
+            $params = array('access_token' => $access_token);
+            
+            $meli = new Meli();
+            $me = $meli->get("/users/me", $params);
+
+            return $me;
+        }else{
+            return array("httpCode" => 400);
+        }
+        
+    }
+    
     
 }
