@@ -18,6 +18,16 @@ class User{
         $this->db = new DB();
     }
     
+    public function all(){
+        $r = $this->db->query("SELECT * FROM users");
+        $users = array();
+        while($user = $r->fetch_array(MYSQLI_ASSOC)){
+            $users[] = $user;
+        }
+        
+        return $users;
+    }
+    
     public function save(){
         
         $r = "";

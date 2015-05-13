@@ -42,6 +42,7 @@ if($r['httpCode'] == 200){
 
 <br/>
 
-Aguarde alguns instantes... <img src="assets/images/ajax-loader.gif">
+Usuário autorizado. <br/>
+Por favor, feche o modal!
 
 

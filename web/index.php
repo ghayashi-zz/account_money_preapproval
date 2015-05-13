@@ -18,6 +18,13 @@
     
     <body>
         
+        <div id="usuarios_autorizados">
+            <h5>Usuários Autorizados</h5>
+            <ul id="lista_usuarios">
+                <li><img src="assets/images/ajax-loader.gif"></li>
+            </ul>
+        </div>
+        
         <div id="box_pagar_mp">
             <div id="logo">
                 <img src="https://mercadopago.mlstatic.com/static/YA8ChboXroj8W0yzaTXl25GRGSy3LsQXYSfkonNLra1.png">

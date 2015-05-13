@@ -1,5 +1,6 @@
 var timer
-            
+var email;
+        
 $( document ).ready(function() {
     $("#showModal").click(function(){
         
@@ -12,7 +13,7 @@ $( document ).ready(function() {
                 $('#modal_auth').modal('toggle');
                 
                 timer = setInterval(function(){
-                    getUserInfo(false);
+                    getListUsuerAuthorized(true);
                 }, 2000);
             }
         });
@@ -20,7 +21,6 @@ $( document ).ready(function() {
     });
     
     $("#showModalPagamento").click(function(){
-        var email = "test_user_44378241@testuser.com";
         $("#box_pagar").hide();
         $("#box_loading").show();
         
@@ -38,12 +38,73 @@ $( document ).ready(function() {
         
     });
     
+    getListUsuerAuthorized(false);
     
-    getUserInfo(true);
+    $("#box_loading").hide();
+    $("#box_auth").show();
 });
 
+
+function getListUsuerAuthorized(auto_get_balance) {
+    $.ajax({
+        url: "get_user_authorized.php",
+        success: function(resp){
+            resp = jQuery.parseJSON(resp);
+            var html = "";
+            
+            if (resp.length == 0) {
+                html += '<li>Nenhum usu√°rio autorizou a aplica√ß√£o</li>';
+            }else{
+                
+                //caso seja maior significa que adicionou um novo usuario e a busca temq eu "acabar"
+                if (resp.length > $(".usuarios_autorizados").length) {
+                    // pausa a action de buscar o saldo
+                    clearInterval(timer);
+                }
+                
+                for (var x in resp) {
+                    user = resp[x];
+                    
+                    //caso seja automatico (processo de autorizacao)
+                    if (auto_get_balance) {
+                        if (resp.length == 1) {
+                            email = user.email
+                            getUserInfo(false);
+                        }
+                    }
+                    
+                    var selected = "";
+                    if (user.email == email) {
+                        selected = " selected";
+                    }
+                    
+                    html += '<li class="usuarios_autorizados'+ selected + '">' + user.email + '</li>';
+                }
+                
+            }
+            
+            $("#lista_usuarios").html(html);
+            actionsUserAuthorized();
+        }
+    });
+}
+
+
+function actionsUserAuthorized(){
+    $(".usuarios_autorizados").click(function(){
+        $("#box_auth").hide();
+        $(".usuarios_autorizados").removeClass("selected");
+        $(this).addClass("selected");
+        email = $(this).html();
+        getUserInfo(true);
+    });
+}
+
 function getUserInfo(show_box_auth) {
-    var email = "test_user_44378241@testuser.com";
+    $("#box_loading").show();
+    $("#box_pagar").hide();
+    $("#box_pagamento_status").hide();
+    $("#user_info").hide();
     
     $.ajax({
         url: "get_user_info.php?email=" + email,
@@ -54,10 +115,7 @@ function getUserInfo(show_box_auth) {
                 var balance = resp.body;
                 
                 // esconde a modal
-                $('#modal_auth').modal('hide');
-                
-                // força a action de buscar o saldo
-                clearInterval(timer);
+                //$('#modal_auth').modal('hide');
                 
                 $("#saldo_mp").html(balance.available_balance)
                 
@@ -71,8 +129,8 @@ function getUserInfo(show_box_auth) {
                 
             }else{
                 
-                // usuario não esta autenticado no mp
-                // libera o box de autenticação
+                // usuario n¬ão esta autenticado no mp
+                // libera o box de autentica¬ç¬ão
                 if (show_box_auth) {
                     $("#box_loading").hide();
                     $("#box_auth").show();
