@@ -2,6 +2,13 @@ var timer
 var email;
         
 $( document ).ready(function() {
+    
+    getListUsuerAuthorized(false);
+    
+    $("#box_loading").hide();
+    $("#box_auth").show();
+    
+    
     $("#showModal").click(function(){
         
         $.ajax({
@@ -38,14 +45,11 @@ $( document ).ready(function() {
         
     });
     
-    getListUsuerAuthorized(false);
-    
-    $("#box_loading").hide();
-    $("#box_auth").show();
 });
 
 
 function getListUsuerAuthorized(auto_get_balance) {
+    console.log("getListUsuerAuthorized");
     $.ajax({
         url: "get_user_authorized.php",
         success: function(resp){
@@ -57,8 +61,10 @@ function getListUsuerAuthorized(auto_get_balance) {
             }else{
                 
                 //caso seja maior significa que adicionou um novo usuario e a busca temq eu "acabar"
+                console.log(resp.length, $(".usuarios_autorizados").length);
                 if (resp.length > $(".usuarios_autorizados").length) {
                     // pausa a action de buscar o saldo
+                    
                     clearInterval(timer);
                 }
                 
@@ -66,18 +72,19 @@ function getListUsuerAuthorized(auto_get_balance) {
                     user = resp[x];
                     
                     //caso seja automatico (processo de autorizacao)
-                    if (auto_get_balance) {
+                    /*if (auto_get_balance) {
+                        console.log(auto_get_balance, resp.length);
                         if (resp.length == 1) {
                             email = user.email
                             getUserInfo(false);
                         }
                     }
                     
-                    var selected = "";
+                    
                     if (user.email == email) {
                         selected = " selected";
-                    }
-                    
+                    }*/
+                    var selected = "";
                     html += '<li class="usuarios_autorizados'+ selected + '">' + user.email + '</li>';
                 }
                 
@@ -91,6 +98,7 @@ function getListUsuerAuthorized(auto_get_balance) {
 
 
 function actionsUserAuthorized(){
+    console.log("actionsUserAuthorized");
     $(".usuarios_autorizados").click(function(){
         $("#box_auth").hide();
         $(".usuarios_autorizados").removeClass("selected");
@@ -101,6 +109,7 @@ function actionsUserAuthorized(){
 }
 
 function getUserInfo(show_box_auth) {
+    console.log("getUserInfo");
     $("#box_loading").show();
     $("#box_pagar").hide();
     $("#box_pagamento_status").hide();
