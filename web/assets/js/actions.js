@@ -49,7 +49,6 @@ $( document ).ready(function() {
 
 
 function getListUsuerAuthorized(auto_get_balance) {
-    console.log("getListUsuerAuthorized");
     $.ajax({
         url: "get_user_authorized.php",
         success: function(resp){
@@ -61,10 +60,8 @@ function getListUsuerAuthorized(auto_get_balance) {
             }else{
                 
                 //caso seja maior significa que adicionou um novo usuario e a busca temq eu "acabar"
-                console.log(resp.length, $(".usuarios_autorizados").length);
-                if (resp.length > $(".usuarios_autorizados").length) {
+                if (resp.length >= $(".usuarios_autorizados").length) {
                     // pausa a action de buscar o saldo
-                    
                     clearInterval(timer);
                 }
                 
@@ -98,7 +95,6 @@ function getListUsuerAuthorized(auto_get_balance) {
 
 
 function actionsUserAuthorized(){
-    console.log("actionsUserAuthorized");
     $(".usuarios_autorizados").click(function(){
         $("#box_auth").hide();
         $(".usuarios_autorizados").removeClass("selected");
@@ -109,7 +105,6 @@ function actionsUserAuthorized(){
 }
 
 function getUserInfo(show_box_auth) {
-    console.log("getUserInfo");
     $("#box_loading").show();
     $("#box_pagar").hide();
     $("#box_pagamento_status").hide();
