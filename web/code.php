@@ -12,6 +12,8 @@ $meli = new Meli();
 
 $r = $meli->authorize($_GET['code'], 'https://account-money-preapproval.herokuapp.com/code.php/code.php');
 
+print_r($r); exit;
+
 if($r['httpCode'] == 200){
     $token = $r['body'];
     $params = array('access_token' => $token->access_token);
